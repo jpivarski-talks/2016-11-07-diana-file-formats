@@ -79,8 +79,53 @@
 %  \tableofcontents
 %\end{frame}
 
-\begin{frame}{Stuff}
+\begin{frame}{The obvious answer: ROOT, right?}
+\vspace{0.25 cm}
+\begin{columns}[t]
+\column{0.5\linewidth}
+\textcolor{darkblue}{Advantages}
 
+\begin{itemize}
+\item Flexible format can encode arbitrarily complex C++ data structures.
+
+\item Encoding (``streaming'') can be hand-tuned.
+
+\item May be record-major or columnar (``split'') with individually compressed columns (``branches'').
+
+\item Familiar to physics community, and developers are very responsive to physics needs.
+
+\end{itemize}
+
+\column{0.5\linewidth}
+\textcolor{darkblue}{Disadvantages}
+
+\begin{itemize}
+\item Lack of native libraries for other runtimes (e.g.\ Spark runs on JVM).
+
+\item Custom encoding can only be read with original code.
+
+\item File format requires a lot of seeking, can't (efficiently) be streamed.
+
+\item No familiarity outside of physics. Big Data and Machine Learning communities use other formats.
+\end{itemize}
+\end{columns}
 \end{frame}
+
+\begin{frame}{Other formats}
+\vspace{0.5 cm}
+\renewcommand{\arraystretch}{1.2}
+\mbox{\hspace{-0.8 cm}}\begin{tabular}{p{2 cm} c c c c c}
+                          & binary & schema     & structures   & columnar & compressable\\\hline
+ROOT                      & yes    & yes        & graphs       & can be   & yes         \\
+XML/JSON                  & no     & external   & trees        & no       & usually no  \\
+MessagePack, UBJSON, CBOR, etc.   & yes    & no         & trees        & no       & some are    \\
+Protobuf, Thrift, Avro    & yes    & yes        & trees        & no       & yes         \\
+Parquet                   & yes    & yes        & trees        & yes      & yes         \\
+Arrow/Feather (in-memory) & yes    & yes        & trees        & yes      & no          \\
+HDF5                      & yes    & yes        & arrays/trees & manually?& yes         \\
+Numpy                     & yes    & yes        & flat arrays  & no       & yes         \\
+\end{tabular}
+\end{frame}
+
 
 \end{document}
