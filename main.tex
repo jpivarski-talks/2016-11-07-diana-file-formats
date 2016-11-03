@@ -83,7 +83,7 @@
 \vspace{0.25 cm}
 \begin{columns}[t]
 \column{0.5\linewidth}
-\textcolor{darkblue}{Advantages}
+\textcolor{darkblue}{Advantages of ROOT}
 
 \begin{itemize}
 \item Flexible format can encode arbitrarily complex C++ data structures.
@@ -97,7 +97,7 @@
 \end{itemize}
 
 \column{0.5\linewidth}
-\textcolor{darkblue}{Disadvantages}
+\textcolor{darkblue}{Disadvantages of ROOT}
 
 \begin{itemize}
 \item Lack of native libraries for other runtimes (e.g.\ Spark runs on JVM).
@@ -112,7 +112,7 @@
 \end{frame}
 
 \begin{frame}{Some popular formats}
-\vspace{0.25 cm}
+\vspace{0.5 cm}
 \renewcommand{\arraystretch}{1.2}
 \mbox{\hspace{-0.8 cm}}\begin{tabular}{p{2 cm} c c c c c}
                           & binary & schema     & structures   & columnar & compressable\\\hline
@@ -124,7 +124,6 @@ Arrow/Feather (in-memory) & yes    & yes        & trees        & yes      & no  
 HDF5                      & yes    & yes        & arrays/trees & manually?& yes         \\
 Numpy                     & yes    & yes        & flat arrays  & no       & yes         \\
 ROOT                      & yes    & yes        & graphs       & can be   & yes         \\
-                          &        &            & (TRefs)      &          &             \\
 \end{tabular}
 
 \vspace{0.25 cm}
