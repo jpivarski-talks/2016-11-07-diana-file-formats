@@ -104,14 +104,14 @@
 
 \item Custom encoding can only be read with original code.
 
-\item File format requires a lot of seeking, can't (efficiently) be streamed.
+\item File format requires a lot of seeking, can't (efficiently) be streamed (e.g.\ via HTTP).
 
 \item No familiarity outside of physics. Big Data and Machine Learning communities use other formats.
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Other formats}
+\begin{frame}{Some popular formats}
 \vspace{0.25 cm}
 \renewcommand{\arraystretch}{1.2}
 \mbox{\hspace{-0.8 cm}}\begin{tabular}{p{2 cm} c c c c c}
@@ -133,11 +133,11 @@ ROOT                      & yes    & yes        & graphs       & can be   & yes 
 \end{frame}
 
 \begin{frame}{Abstract type systems}
-\vspace{0.5 cm}
-Every serialization format must have a type system.
+\vspace{0.25 cm}
+Every serialization format must have a type system. Most are not glued to a particular language.
 
-\vspace{0.5 cm}
-Most are interchangeable:
+\vspace{0.4 cm}
+\textcolor{darkblue}{Different type systems, but the reuse the same concepts:}
 \begin{enumerate}
 \item boolean, integers, floats, strings, maybe null (singleton)
 \item variable-length arrays of X, maybe key-value maps of X
@@ -145,11 +145,14 @@ Most are interchangeable:
 \item maybe tagged unions of the above (sum types)
 \end{enumerate}
 
-\vspace{0.5 cm}
+\vspace{0.4 cm}
 ``Flat arrays'' (Numpy; TNtuple) are fixed-length arrays of \textcolor{darkblue}{\#1} only.
 
-\vspace{0.5 cm}
+\vspace{0.4 cm}
 ``Graphs'' (ROOT) describe a full object graph using indexes that point into an array.
+
+\vspace{0.4 cm}
+Tagged unions can encode nullable types and are more general than class hierarchies.
 \end{frame}
 
 \begin{frame}{Logical type systems}
@@ -162,7 +165,7 @@ For example,
 \begin{itemize}
 \item flat arrays (Numpy) can encode structures with index arrays:
 
-\includegraphics[width=\linewidth]{hierarchical_arrays.pdf}
+\includegraphics[width=0.8\linewidth]{hierarchical_arrays.pdf}
 
 \item Parquet uses logical type systems to provide Avro objects.
 
@@ -170,10 +173,35 @@ For example,
 \end{itemize}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Why use alternate formats?}
+\vspace{0.25 cm}
+\begin{block}{Transient: getting data into another system}
+\begin{itemize}
+\item Necessary in many cases: the C++/Java barrier is particularly difficult to overcome.
+\end{itemize}
+\end{block}
 
+\begin{block}{End-stage of analysis in another system}
+\begin{itemize}
+\item If we're making ntuples anyway, the format should be chosen with the analysis tool in mind: ROOT or otherwise.
+\end{itemize}
+\end{block}
 
+\begin{block}{Releasing open data to the public}
+\begin{itemize}
+\item Current format probably inhibits use. Avro/Parquet on popular analysis clouds (AWS, Google Cloud, Azure, etc.)?
+\end{itemize}
+\end{block}
 
+\begin{block}{New primary data storage format?}
+\begin{itemize}
+\item Would require {\it considerable} thought.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Today's talks}
+\includegraphics[width=\linewidth]{schedule.png}
 \end{frame}
 
 \end{document}
