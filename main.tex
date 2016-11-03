@@ -112,20 +112,68 @@
 \end{frame}
 
 \begin{frame}{Other formats}
-\vspace{0.5 cm}
+\vspace{0.25 cm}
 \renewcommand{\arraystretch}{1.2}
 \mbox{\hspace{-0.8 cm}}\begin{tabular}{p{2 cm} c c c c c}
                           & binary & schema     & structures   & columnar & compressable\\\hline
-ROOT                      & yes    & yes        & graphs       & can be   & yes         \\
-XML/JSON                  & no     & external   & trees        & no       & usually no  \\
+XML/JSON                  & no     & external   & trees        & no       & external    \\
 MessagePack, UBJSON, CBOR, etc.   & yes    & no         & trees        & no       & some are    \\
 Protobuf, Thrift, Avro    & yes    & yes        & trees        & no       & yes         \\
 Parquet                   & yes    & yes        & trees        & yes      & yes         \\
 Arrow/Feather (in-memory) & yes    & yes        & trees        & yes      & no          \\
 HDF5                      & yes    & yes        & arrays/trees & manually?& yes         \\
 Numpy                     & yes    & yes        & flat arrays  & no       & yes         \\
+ROOT                      & yes    & yes        & graphs       & can be   & yes         \\
+                          &        &            & (TRefs)      &          &             \\
 \end{tabular}
+
+\vspace{0.25 cm}
+\scriptsize \mbox{\hspace{-0.5 cm}\textcolor{blue}{\url{http://en.wikipedia.org/wiki/Comparison_of_data_serialization_formats}}}
+% 40 formats listed; ROOT isn't one of them!
 \end{frame}
 
+\begin{frame}{Abstract type systems}
+\vspace{0.5 cm}
+Every serialization format must have a type system.
+
+\vspace{0.5 cm}
+Most are interchangeable:
+\begin{enumerate}
+\item boolean, integers, floats, strings, maybe null (singleton)
+\item variable-length arrays of X, maybe key-value maps of X
+\item record structures with named, typed fields (product types)
+\item maybe tagged unions of the above (sum types)
+\end{enumerate}
+
+\vspace{0.5 cm}
+``Flat arrays'' (Numpy; TNtuple) are fixed-length arrays of \textcolor{darkblue}{\#1} only.
+
+\vspace{0.5 cm}
+``Graphs'' (ROOT) describe a full object graph using indexes that point into an array.
+\end{frame}
+
+\begin{frame}{Logical type systems}
+\vspace{0.25 cm}
+Type systems are not limiting: conventions and interpretations on top of the ``physical type system'' can provide high-level features.
+
+\vspace{0.1 cm}
+For example,
+
+\begin{itemize}
+\item flat arrays (Numpy) can encode structures with index arrays:
+
+\includegraphics[width=\linewidth]{hierarchical_arrays.pdf}
+
+\item Parquet uses logical type systems to provide Avro objects.
+
+\item ROOT's physical types are streamers, logical types are C++.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+
+
+
+\end{frame}
 
 \end{document}
